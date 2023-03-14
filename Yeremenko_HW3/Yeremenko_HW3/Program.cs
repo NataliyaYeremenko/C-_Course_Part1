@@ -36,9 +36,10 @@ namespace Yeremenko_HW3
             Console.WriteLine("***** Part 4: Compute the sum of the first 500 prime numbers *****");
             int primeNum = 2;
             bool primeCondition = true;
+            int primeCount = 1;
             int sumOfPrimes = 0;
-            Console.Write("Prime numbers from 1 to 500: ");
-            while (primeNum <= 500)
+            Console.Write("First 500 prime numbers: ");
+            while (primeCount <= 500)
             {
                 for(int i = primeNum-1; i > 1; i--)
                     if (primeNum % i == 0)
@@ -50,6 +51,7 @@ namespace Yeremenko_HW3
                 { 
                     sumOfPrimes += primeNum;
                     Console.Write("" + primeNum + ";  ");
+                    ++primeCount;
                 }
                 primeCondition = true;
                 ++primeNum;
@@ -60,7 +62,7 @@ namespace Yeremenko_HW3
             
             Console.WriteLine("***** Part 5: Compute the sum of the digits of an integer number *****");
             Console.Write("Input a number (integer): ");
-            int num3 = Convert.ToInt32(Console.ReadLine());
+            int num3 = Math.Abs(Convert.ToInt32(Console.ReadLine()));
             int digitCount = num3.ToString().Length;
             int sumOfDigits = 0;
             while (digitCount >= 1) 
