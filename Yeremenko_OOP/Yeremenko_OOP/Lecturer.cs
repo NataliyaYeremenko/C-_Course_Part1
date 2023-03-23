@@ -27,6 +27,31 @@ namespace Yeremenko_OOP
             }
             return count;
         }
+        public string GetEnrolledCoursesNames()
+        {
+            string enrolledCourses = "";
+            if (GetEnrolledCoursesCount() != 0)
+            {
+                for (int i = 0; i < GetEnrolledCoursesCount(); i++)
+                {
+                    enrolledCourses += ($"{CoursesList[i].CourseName}");
+                    if (i < GetEnrolledCoursesCount() - 1) enrolledCourses += ", ";
+                }
+            }
+            return enrolledCourses;
+        }
+        public string GetEnrolledCoursesFullInfo()
+        {
+            string enrolledCourses = "";
+            if (GetEnrolledCoursesCount() != 0)
+            {
+                for (int i = 0; i < GetEnrolledCoursesCount(); i++)
+                {
+                    enrolledCourses += ($"\tCourse_ID={CoursesList[i].CourseId}: {CoursesList[i].CourseName}, enrolled students count: {CoursesList[i].GetRealStudentsCountForCourse()}\n");
+                }
+            }
+            return enrolledCourses;
+        }
         public bool IsCourseCouldBeAddedToList(Course course)
         {
             bool condition = false;
@@ -59,12 +84,18 @@ namespace Yeremenko_OOP
             base.Print();
             if (GetEnrolledCoursesCount() != 0)
             {
-                Console.WriteLine("Enrolled courses:");
-                for (int i = 0; i < GetEnrolledCoursesCount(); i++)
-                {
-                    Console.WriteLine($"    Course_ID={CoursesList[i].CourseId}: {CoursesList[i].CourseName}");
-                }
+                Console.WriteLine("Enrolled courses:\n"+GetEnrolledCoursesFullInfo());
             }
+        }
+        public override void DescribeYourself()
+        {
+            base.DescribeYourself();
+            Console.Write("I am a Lecturer. ");
+            if (GetEnrolledCoursesCount() > 0)
+            {
+                Console.WriteLine($"I am working on {GetEnrolledCoursesCount()} course(s): {GetEnrolledCoursesNames()}");
+            }
+            else { Console.WriteLine("I haven't worked on any course yet."); }
         }
     }
 }

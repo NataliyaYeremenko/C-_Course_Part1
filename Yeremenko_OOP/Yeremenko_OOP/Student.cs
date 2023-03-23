@@ -19,6 +19,32 @@ namespace Yeremenko_OOP
             CoursesList = new Course[MAX_ENROLLED_COURSES];  // the maximum number of courses for one student is assumed to be 10
         }
 
+        public string GetEnrolledCoursesFullInfo()
+        {
+            string enrolledCourses="";
+            if (GetEnrolledCoursesCount() != 0)
+            {
+                for (int i = 0; i < GetEnrolledCoursesCount(); i++)
+                {
+                    enrolledCourses += ($"\tCourse_ID={CoursesList[i].CourseId}: {CoursesList[i].CourseName}, Lecturer: {CoursesList[i].Lecturer.Name} {CoursesList[i].Lecturer.LastName}\n");
+                }
+            }
+            return enrolledCourses;
+        }
+        public string GetEnrolledCoursesNames()
+        {
+            string enrolledCourses = "";
+            if (GetEnrolledCoursesCount() != 0)
+            {
+                for (int i = 0; i < GetEnrolledCoursesCount(); i++)
+                {
+                    enrolledCourses += ($"{CoursesList[i].CourseName}");
+                    if (i < GetEnrolledCoursesCount()-1) enrolledCourses += ", ";
+                }
+            }
+            return enrolledCourses;
+        }
+
         public override void Print()
         {
             Console.WriteLine("\n*** Student Info ***");
@@ -26,14 +52,20 @@ namespace Yeremenko_OOP
             base.Print();
             if (GetEnrolledCoursesCount() != 0)
             {
-                Console.WriteLine("Enrolled courses:");
-                for (int i=0; i<GetEnrolledCoursesCount(); i++)
-                {
-                    Console.WriteLine($"    Course_ID={CoursesList[i].CourseId}: {CoursesList[i].CourseName}, Lecturer: {CoursesList[i].Lecturer.Name} {CoursesList[i].Lecturer.LastName}");
-                }
+                Console.WriteLine("Enrolled courses:\n"+GetEnrolledCoursesFullInfo());
             }
         }
-        public int GetEnrolledCoursesCount()
+        public override void DescribeYourself()
+        {
+            base.DescribeYourself();
+            Console.Write("I am a Student. ");
+            if (GetEnrolledCoursesCount() > 0)
+            {
+                Console.WriteLine($"I am taking {GetEnrolledCoursesCount()} course(s): {GetEnrolledCoursesNames()}");
+            }
+            else { Console.WriteLine("I haven't enrolled in any course yet."); }
+        }
+            public int GetEnrolledCoursesCount()
         {
             int count = 0;
             foreach (var st in CoursesList)

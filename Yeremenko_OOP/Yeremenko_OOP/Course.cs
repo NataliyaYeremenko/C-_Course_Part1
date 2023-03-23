@@ -67,7 +67,7 @@ namespace Yeremenko_OOP
                 Console.WriteLine("Enrolled students:");
                 for (int i = 0; i < GetRealStudentsCountForCourse(); i++)
                 {
-                    Console.WriteLine($"    Student_ID={StudentsList[i].StudentId}: {StudentsList[i].Name} {StudentsList[i].LastName}");
+                    Console.WriteLine($"\tStudent_ID={StudentsList[i].StudentId}: {StudentsList[i].Name} {StudentsList[i].LastName}");
                 }
             }
         }

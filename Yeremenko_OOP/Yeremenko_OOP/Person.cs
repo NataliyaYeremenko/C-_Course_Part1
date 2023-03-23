@@ -21,6 +21,16 @@ namespace Yeremenko_OOP
                
             );
         }
+
+        public virtual void DescribeYourself()
+        {
+            Console.Write($"My name is {Name} {LastName}. I am {Age} years old. ");
+            if (!String.Equals(City, "No information provided"))
+            {
+                Console.WriteLine($"I am from {City}.");
+            }
+            else Console.WriteLine();
+        }
         public Person(string name, string lastName, DateOnly dob)
         {
             Name = name;

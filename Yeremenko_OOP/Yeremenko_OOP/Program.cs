@@ -75,6 +75,19 @@
             course2.Print();
             std4.Print();
 
+            course3.AddStudentToCourse(std4);
+            course4.AddStudentToCourse(std4);
+            course5.AddStudentToCourse(std4);
+            course6.AddStudentToCourse(std4);
+
+            Console.WriteLine("\n ================== Describe Yourself ================== \n");
+            std4.DescribeYourself();
+            Console.WriteLine();
+            lec1.DescribeYourself();
+            Console.WriteLine();
+            std7.DescribeYourself();
+            Console.WriteLine();
+            lec3.DescribeYourself();
         }
     }
 }
