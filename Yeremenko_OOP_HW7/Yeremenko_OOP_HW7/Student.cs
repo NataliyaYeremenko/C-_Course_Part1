@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Yeremenko_OOP_HW7
 {
@@ -18,31 +19,32 @@ namespace Yeremenko_OOP_HW7
             StudentId = ++_studentCount;
             CoursesList = new List<Course>();
             MaxEnrolledCoursesCount = 10; // the maximum number of courses for one student is assumed to be 10
+            InfoClass._students.Add(this);
         }
         public string GetEnrolledCoursesFullInfo()
         {
-            string enrolledCourses = "";
+            var enrolledCourses = new StringBuilder();
             if (CoursesList.Count != 0)
             {
                 foreach(var course in CoursesList) 
                 {
-                    enrolledCourses += ($"\tCourse_ID={course.CourseId}: {course.CourseName}, Lecturer: {course.Lecturer.Name} {course.Lecturer.LastName}\n");
+                    enrolledCourses.Append($"\tCourse_ID={course.CourseId}: {course.CourseName}, Lecturer: {course.Lecturer.Name} {course.Lecturer.LastName}\n");
                 }
             }
-            return enrolledCourses;
+            return enrolledCourses.ToString();
         }
         public string GetEnrolledCoursesNames()
         {
-            string enrolledCourses = "";
+            var enrolledCourses = new StringBuilder();
             if (CoursesList.Count != 0)
             {
                 for (int i = 0; i < CoursesList.Count; i++)
                 {
-                    enrolledCourses += ($"{CoursesList[i].CourseName}");
-                    if (i < CoursesList.Count - 1) enrolledCourses += ", ";
+                    enrolledCourses.Append($"{CoursesList[i].CourseName}");
+                    if (i < CoursesList.Count - 1) enrolledCourses.Append(", ");
                 }
             }
-            return enrolledCourses;
+            return enrolledCourses.ToString();
         }
         public int GetEnrolledCoursesCount() { return CoursesList.Count; }
         public override void Print()
@@ -54,6 +56,16 @@ namespace Yeremenko_OOP_HW7
             {
                 Console.WriteLine("Enrolled courses:\n" + GetEnrolledCoursesFullInfo());
             }
+        }       
+        public void PrintInfo()
+        {
+            Console.Write($"Student_ID={StudentId}: {Name} {LastName}, {DoB}. ");
+            if (CoursesList.Count != 0)
+            {
+                Console.WriteLine("Enrolled courses: " + GetEnrolledCoursesNames());
+            }
+            else Console.WriteLine();
+            Console.WriteLine();
         }
         public override void DescribeYourself()
         {

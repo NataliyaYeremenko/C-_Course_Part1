@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Yeremenko_OOP_HW7
 {
@@ -14,17 +15,39 @@ namespace Yeremenko_OOP_HW7
         public List<Student> StudentsList { get; private set; }
         public Course(string courseName, Lecturer lecturer, int courseDuration, int maxCapacityForCourse)
         {
-            if (lecturer.IsCourseCouldBeAddedToList(this))
+            try
             {
-                CourseId = ++_coursesCount;
-                CourseName = courseName;
-                Lecturer = lecturer;
-                CourseDuration = courseDuration;
-                MaxCapacityForCourse = maxCapacityForCourse;
-                StudentsList = new List<Student>();
-                lecturer.AddCourse(this);
+                if (lecturer.IsCourseCouldBeAddedToList(this))
+                {
+                    CourseId = ++_coursesCount;
+                    CourseName = courseName;
+                    Lecturer = lecturer;
+                    CourseDuration = courseDuration;
+                    MaxCapacityForCourse = maxCapacityForCourse;
+                    StudentsList = new List<Student>();
+                    lecturer.AddCourse(this);
+                    InfoClass._courses.Add(this);
+                }
+                else throw new Exception($"Course '{courseName}' wasn't created");
             }
-            else return;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void PrintInfo()
+        {
+            Console.WriteLine($"Course_Id={CourseId}: {CourseName}. Lecturer: {Lecturer.Name} {Lecturer.LastName}");
+            if (StudentsList.Count != 0)
+            {
+                Console.WriteLine("Enrolled students:");
+                for (int i = 0; i < StudentsList.Count; i++)
+                {
+                    Console.WriteLine($"\tStudent_ID={StudentsList[i].StudentId}: {StudentsList[i].Name} {StudentsList[i].LastName}");
+                }
+                Console.WriteLine();
+            }
+            else Console.WriteLine();
         }
         public void Print()
         {
@@ -46,6 +69,19 @@ namespace Yeremenko_OOP_HW7
             }
         }
         public int GetEnrolledStudentsCount() { return  StudentsList.Count; }
+        public string GetEnrolledStudentsNames()
+        {
+            var enrolledStudents = new StringBuilder();
+            if (StudentsList.Count != 0)
+            {
+                for (int i = 0; i < StudentsList.Count; i++)
+                {
+                    enrolledStudents.Append(StudentsList[i].Name).Append(" ").Append(StudentsList[i].LastName);
+                    if (i < StudentsList.Count - 1) enrolledStudents.Append(", ");
+                }
+            }
+            return enrolledStudents.ToString();
+        }
         public bool IsStudentCoudBeEnrolledToCourse(Student student)
         {
             bool condition = true;

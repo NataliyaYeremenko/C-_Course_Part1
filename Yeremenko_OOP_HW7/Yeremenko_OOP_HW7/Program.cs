@@ -4,6 +4,9 @@
     {
         static void Main(string[] args)
         {
+            InfoClass.PrintFullStudentsList();
+            InfoClass.PrintFullLecturersList();
+            InfoClass.PrintFullCoursesList();
             Lecturer lec1 = new Lecturer("Sam", "Don", new DateOnly(1960, 9, 28), "Kyiv");
             Lecturer lec2 = new Lecturer("Lidia", "Don", new DateOnly(1968, 07, 01), "Kyiv");
             Lecturer lec3 = new Lecturer("Sonya", "Dast", new DateOnly(1976, 11, 11));
@@ -104,6 +107,12 @@
 
             lec3.Print();
             lec3.PrintStudentsList();
+
+            InfoClass.PrintFullStudentsList();
+            InfoClass.PrintFullLecturersList();
+            InfoClass.PrintFullCoursesList();
+
+            InfoClass.GetFilteredList();
         }
     }
 }
